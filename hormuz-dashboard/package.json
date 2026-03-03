@@ -1,0 +1,10 @@
+{
+  "name": "hormuz-energy-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Geopolitical Energy Intelligence Dashboard — Strait of Hormuz Crisis Scenario",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  }
+}
