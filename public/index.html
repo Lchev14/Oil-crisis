@@ -46,12 +46,7 @@ html{font-size:16px}body{font-family:'DM Sans',sans-serif;background:var(--bg);c
 .chart-label{font-size:.7rem;color:var(--g);font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:6px 10px;background:var(--bgc2);border-bottom:1px solid var(--brd);display:flex;justify-content:space-between;align-items:center}
 .chart-label .kpival{color:var(--acc);font-family:'JetBrains Mono',monospace}
 .tv-box{height:230px;overflow:hidden}
-/* Sparkline data card for non-embeddable symbols */
-.spark-card{height:230px;display:flex;flex-direction:column;padding:10px 14px}
-.spark-price{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;margin:4px 0}
-.spark-change{font-size:.9rem;font-weight:700;margin-bottom:6px}
-.spark-ref{font-size:.65rem;color:var(--txl)}
-.spark-svg{flex:1;width:100%;min-height:0}
+/* All charts use TradingView widgetembed iframes */
 
 .tf-bar{display:flex;align-items:center;gap:6px;padding:10px 16px;border-bottom:1px solid var(--brd)}
 .tf-lbl{font-size:.75rem;color:var(--txl);font-weight:600}
@@ -189,13 +184,16 @@ function newsHTML(id) {
 
 // Fetch live news from our Vercel API proxy (or fallback CORS proxy)
 function fetchLiveNews() {
-  var queries = ['oil crude energy Hormuz Iran', 'oil price OPEC crude tanker', 'Iran Israel Middle East energy'];
-  var apiUrl = '/api/news?q=' + encodeURIComponent(queries[0]) + '&num=15';
+  var q = 'Strait Hormuz oil Iran tanker energy crisis';
+  var ts = Date.now(); // cache buster
+  var rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(q) + '&hl=en&gl=US&ceid=US:en&_t=' + ts;
   
-  // Try our serverless function first, then fallback to CORS proxy for standalone use
+  // Try: 1) Vercel serverless, 2) corsproxy.io, 3) thingproxy, 4) allorigins
   var urls = [
-    apiUrl,
-    'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://news.google.com/rss/search?q=' + encodeURIComponent(queries[0]) + '&hl=en&gl=US&ceid=US:en')
+    '/api/news?q=' + encodeURIComponent(q) + '&num=15&_t=' + ts,
+    'https://corsproxy.io/?' + encodeURIComponent(rssUrl),
+    'https://thingproxy.freeboard.io/fetch/' + rssUrl,
+    'https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl)
   ];
   
   tryFetch(urls, 0);
@@ -208,8 +206,12 @@ function tryFetch(urls, idx) {
     return;
   }
   
-  fetch(urls[idx])
+  var controller = new AbortController();
+  var timeoutId = setTimeout(function() { controller.abort(); }, 6000);
+  
+  fetch(urls[idx], {signal: controller.signal})
     .then(function(r) {
+      clearTimeout(timeoutId);
       if (!r.ok) throw new Error('HTTP ' + r.status);
       var ct = r.headers.get('content-type') || '';
       if (ct.indexOf('json') >= 0) return r.json().then(function(d) { return {type:'json', data:d}; });
@@ -272,10 +274,13 @@ function exTag(xml,tag) {
 }
 
 function updateNewsStatus(msg) {
+  var now = new Date();
+  var timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  var fullMsg = msg + (msg.indexOf('live') >= 0 ? ' · updated ' + timeStr : '');
   ['nf1-status','nf2-status','nf3-status'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) {
-      el.textContent = msg;
+      el.textContent = fullMsg;
       el.style.color = msg.indexOf('live') >= 0 ? 'var(--g)' : 'var(--txl)';
     }
   });
@@ -286,42 +291,21 @@ setTimeout(fetchLiveNews, 1000);
 setInterval(fetchLiveNews, 300000);
 
 // ═══ CHART DATA ═══
-// TradingView embeddable (CFD symbols)
-var TV_CHARTS=[
+// ALL charts use TradingView advanced-chart embed with CFD symbols (confirmed embeddable)
+var ALL_CHARTS=[
   {sym:"TVC:UKOIL",label:"Brent Crude Oil",kpi:"$79.41 (+12.3%)"},
   {sym:"TVC:USOIL",label:"WTI Crude Oil",kpi:"$72.79 (+8.8%)"},
   {sym:"PEPPERSTONE:NATGAS",label:"Henry Hub Natural Gas",kpi:"$4.82 (+21%)"},
+  {sym:"LSE:TTFW",label:"TTF Dutch Gas (WisdomTree ETF)",kpi:"€95/MWh (+28%)"},
+  {sym:"AMEX:UGA",label:"RBOB Gasoline (US Gas Fund)",kpi:"Gasoline Tracker"},
   {sym:"TVC:GOLD",label:"Gold (Safe Haven)",kpi:"$2,950+ (+4%)"},
-  {sym:"FX_IDC:EURUSD",label:"EUR/USD (Currency Impact)",kpi:"EUR/USD"},
+  {sym:"FX_IDC:EURUSD",label:"EUR/USD",kpi:"Currency Impact"},
+  {sym:"CAPITALCOM:DXY",label:"US Dollar Index (DXY)",kpi:"DXY ~97.5"},
+  {sym:"AMEX:BDRY",label:"Baltic Dry Index (Shipping ETF)",kpi:"Freight Proxy"},
 ];
-// SVG sparkline cards (futures not embeddable)
-var SPARK_CHARTS=[
-  {label:"TTF Dutch Gas",price:"€44.5/MWh",change:"+53%",ref:"Fri Feb 26: €29.0",color:"#FF6B35",
-   pts:[29.0,29.2,28.8,29.1,29.0,31.5,36.0,40.2,43.8,44.5]},
-  {label:"RBOB Gasoline",price:"$2.41/gal",change:"+14%",ref:"Fri Feb 26: $2.11",color:"#E8A317",
-   pts:[2.11,2.12,2.10,2.11,2.11,2.18,2.28,2.35,2.39,2.41]},
-  {label:"Baltic Dry Index",price:"1,842",change:"+5.1%",ref:"Dry bulk freight",color:"#3498DB",
-   pts:[1752,1760,1755,1763,1753,1770,1795,1820,1835,1842]},
-  {label:"EU EEX Power",price:"€95/MWh",change:"+28%",ref:"Fri Feb 26: €74/MWh",color:"#9B59B6",
-   pts:[74,73,75,74,74,78,84,90,93,95]},
-];
-
-function makeSpark(pts,color,w,h){
-  var mn=Math.min.apply(null,pts),mx=Math.max.apply(null,pts),rng=mx-mn||1;
-  var pad=8,pw=w-pad*2,ph=h-pad*2;
-  var coords=pts.map(function(v,i){return (pad+i/(pts.length-1)*pw)+','+(pad+ph-(v-mn)/rng*ph)});
-  var polyline=coords.join(' ');
-  var area=pad+','+h+' '+polyline+' '+(pad+(pts.length-1)/(pts.length-1)*pw)+','+h;
-  return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" style="display:block;width:100%;height:100%">'+
-    '<defs><linearGradient id="g_'+color.replace('#','')+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="'+color+'" stop-opacity="0.25"/><stop offset="100%" stop-color="'+color+'" stop-opacity="0.02"/></linearGradient></defs>'+
-    '<polygon points="'+area+'" fill="url(#g_'+color.replace('#','')+')" />'+
-    '<polyline points="'+polyline+'" fill="none" stroke="'+color+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'+
-    '<circle cx="'+coords[coords.length-1].split(',')[0]+'" cy="'+coords[coords.length-1].split(',')[1]+'" r="4" fill="'+color+'" stroke="'+color+'" stroke-width="1.5"/>'+
-    '</svg>';
-}
 
 document.getElementById('t-prices').innerHTML=
-  '<div class="co i" style="margin-bottom:10px"><strong>Glossary:</strong> <strong>VLCC</strong> = supertanker ($200k+/day vs normal $45k/day). <strong>BDI</strong> = Baltic Dry Index. <strong>BDTI</strong> = Baltic Dirty Tanker Index. <strong>EEX</strong> = European Energy Exchange. <strong>PJM</strong> = US power market. <strong>TTF</strong> = Dutch Title Transfer Facility (EU gas benchmark). Live TradingView charts for Brent, WTI, NatGas, Gold, EUR/USD. Sparkline cards for TTF, RBOB, BDI, EEX (data: Reuters/Bloomberg/ICE).</div>'+
+  '<div class="co i" style="margin-bottom:10px"><strong>Glossary:</strong> <strong>VLCC</strong> = supertanker ($200k+/day vs normal $45k/day). <strong>BDI</strong> = Baltic Dry Index. <strong>BDTI</strong> = Baltic Dirty Tanker Index. <strong>EEX</strong> = European Energy Exchange. <strong>PJM</strong> = US power market. <strong>TTF</strong> = Dutch Title Transfer Facility (EU gas benchmark).<br><span style="color:var(--txl);font-size:.68rem">Charts: TradingView live embeds. TTF via LSE:TTFW (WisdomTree EU NatGas ETF). RBOB via AMEX:UGA (US Gasoline Fund). BDI via AMEX:BDRY (Dry Bulk Shipping ETF). No server required — all charts work offline.</span></div>'+
   '<div class="gms"><div>'+
     '<div class="cd"><div class="cd-h">Live Commodity & Index Charts</div>'+
       '<div class="tf-bar" id="tf-main"><span class="tf-lbl">Timeframe:</span>'+
@@ -333,31 +317,23 @@ document.getElementById('t-prices').innerHTML=
     '</div>'+
   '</div><div>'+newsHTML('nf1')+'</div></div>';
 
-function buildCharts(interval,range){
-  var g=document.getElementById('cgrid');g.innerHTML='';
-  // TradingView live charts
-  TV_CHARTS.forEach(function(c){
-    var opts=JSON.stringify({symbol:c.sym,interval:interval,timezone:"Europe/Berlin",theme:"dark",style:"3",locale:"en",backgroundColor:"rgba(14,25,24,1)",gridColor:"rgba(26,46,44,0.15)",hide_top_toolbar:true,hide_legend:false,save_image:false,hide_volume:true,allow_symbol_change:false,range:range,calendar:false,autosize:true});
-    var url="https://s.tradingview.com/embed-widget/advanced-chart/?locale=en#"+encodeURIComponent(opts);
-    var t=document.createElement('div');t.className='chart-tile';
-    t.innerHTML='<div class="chart-label"><span>'+c.label+'</span><span class="kpival">'+c.kpi+'</span></div><div class="tv-box"><iframe src="'+url+'" style="width:100%;height:100%;border:none;display:block" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups"></iframe></div>';
-    g.appendChild(t);
-  });
-  // SVG sparkline cards for non-embeddable futures
-  SPARK_CHARTS.forEach(function(c){
-    var t=document.createElement('div');t.className='chart-tile';
-    t.innerHTML='<div class="chart-label"><span>'+c.label+'</span><span class="kpival">'+c.change+'</span></div>'+
-      '<div class="spark-card">'+
-        '<div class="spark-price" style="color:'+c.color+'">'+c.price+'</div>'+
-        '<div class="spark-change up">'+c.change+' since pre-conflict</div>'+
-        '<div class="spark-ref">'+c.ref+' · Feb 22–Mar 3 · Source: ICE/Reuters</div>'+
-        '<div class="spark-svg">'+makeSpark(c.pts,c.color,400,120)+'</div>'+
-      '</div>';
+function buildCharts(interval, range) {
+  var g = document.getElementById('cgrid'); g.innerHTML = '';
+  ALL_CHARTS.forEach(function(c) {
+    var t = document.createElement('div'); t.className = 'chart-tile';
+    var opts = JSON.stringify({symbol:c.sym,interval:interval,timezone:"Europe/Berlin",theme:"dark",style:"3",locale:"en",backgroundColor:"rgba(14,25,24,1)",gridColor:"rgba(26,46,44,0.15)",hide_top_toolbar:true,hide_legend:false,save_image:false,hide_volume:true,allow_symbol_change:false,range:range,calendar:false,autosize:true});
+    var url = "https://s.tradingview.com/embed-widget/advanced-chart/?locale=en#" + encodeURIComponent(opts);
+    t.innerHTML = '<div class="chart-label"><span>' + c.label + '</span><span class="kpival">' + c.kpi + '</span></div>' +
+      '<div class="tv-box"><iframe src="' + url + '" style="width:100%;height:100%;border:none;display:block" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups"></iframe></div>';
     g.appendChild(t);
   });
 }
-function switchAll(i,r,btn){document.getElementById('tf-main').querySelectorAll('.tf-btn').forEach(function(b){b.classList.remove('on')});btn.classList.add('on');buildCharts(i,r)}
-buildCharts('60','5D');
+function switchAll(i, r, btn) {
+  document.getElementById('tf-main').querySelectorAll('.tf-btn').forEach(function(b) { b.classList.remove('on'); });
+  btn.classList.add('on');
+  buildCharts(i, r);
+}
+buildCharts('60', '5D');
 
 // ═══ TAB 2: DEPENDENCIES ═══
 function bH(data){return data.map(function(d){return '<div class="br"><div class="br-l">'+d.s+'</div><div class="br-t"><div class="br-f" style="width:'+Math.min(d.p*2,100)+'%;background:linear-gradient(90deg,'+d.c+'77,'+d.c+')"></div></div><div class="br-p">'+d.p+'%</div></div>'}).join('')}
