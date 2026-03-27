@@ -144,7 +144,7 @@ var TL=[
   {date:"Mar 11, 09:00",desc:"IEA: 32 nations release 400M bbl from reserves",sev:"ne"},
   {date:"Mar 13, 12:00",desc:"Iran allows India, Pakistan, Turkey ships through",sev:"ne"},
   {date:"Mar 16, 10:00",desc:"Bessent: US allowing Iranian tankers through",sev:"ne"},
-  {date:"Mar 18, 08:00",desc:"~8 vessels/day transiting (Windward) \u2014 up from zero",sev:"ne"},
+  {date:"Mar 18, 08:00",desc:"~7 vessels/day (Windward) \u2014 selective Iran-controlled transit",sev:"ne"},
   {date:"Mar 19, 06:00",desc:"Israel strikes Iran South Pars gasfield",sev:"cr"},
   {date:"Mar 19, 10:00",desc:"Ras Laffan struck again \u2014 extensive damage",sev:"cr"},
   {date:"Mar 19, 14:00",desc:"SAMREF/Yanbu targeted \u2014 minimal impact",sev:"hi"},
@@ -155,6 +155,10 @@ var TL=[
   {date:"Mar 24, 08:00",desc:"Iran tells IMO: non-hostile ships can transit",sev:"ne"},
   {date:"Mar 24, 14:00",desc:"IEA: 40+ assets damaged, largest disruption ever",sev:"hi"},
   {date:"Mar 25, 08:00",desc:"Brent ~$99 \u2014 down from $119 peak",sev:"ne"},
+  {date:"Mar 26, 08:00",desc:"Trump extends Hormuz deadline to Apr 6",sev:"ne"},
+  {date:"Mar 26, 12:00",desc:"Iran charging fees for Hormuz transit in Yuan",sev:"cr"},
+  {date:"Mar 26, 16:00",desc:"Israel kills IRGC Navy commander",sev:"cr"},
+  {date:"Mar 27, 06:00",desc:"Brent $108 \u2014 Iran rejects direct US talks",sev:"hi"},
 ];
 // timeline removed
 
@@ -168,7 +172,7 @@ function updateExecSummary(){
   elDate.textContent=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric',timeZone:'Europe/Prague'});
   var days=Math.floor((now-new Date('2026-02-28T02:00:00Z'))/86400000);
   var brent=KPI[0].v,wti=KPI[1].v,spread=KPI[2].v,ttf=KPI[3].v,gold=KPI[11].v,dxy=KPI[12].v;
-  var h='<strong>Day '+days+' of Operation Epic Fury.</strong> The <strong class="red">Strait of Hormuz remains effectively closed</strong> — transits at ~6/day (vs 50 normal). IRGC continues blocking all commercial shipping.<br><br>';
+  var h='<strong>Day '+days+' of Operation Epic Fury.</strong> The <strong class="red">Strait of Hormuz remains effectively closed</strong> \u2014 transits at ~5-7/day (vs 120 normal, -94%). Iran operating selective, fee-based transit regime.<br><br>';
   h+='<strong>Crude:</strong> Brent '+brent+', WTI '+wti+', spread '+spread+' (widening = Hormuz premium). Goldman raised Q2 forecast +$10 to $76 avg. <strong class="red">$100/bbl</strong> if blockade >2 more weeks.<br><br>';
   h+='<strong>Gas & Power:</strong> TTF '+ttf+' (+38% vs pre-conflict). Qatar LNG blocked. German power '+KPI[6].v+'/MWh. Henry Hub '+KPI[4].v+' (US insulated).<br><br>';
   h+='<strong>Supply gap:</strong> ~20M bbl/d blocked. Bypass: Saudi Yanbu (~3M) + UAE Fujairah (~1.5M) = 4.5M. <strong class="red">Net gap: ~15.5M bbl/d.</strong> IEA SPR covers ~77 days at this rate.<br><br>';
@@ -201,7 +205,7 @@ const KPI=[
   {l:"Gold",v:"$5,145",c:"-1.5%",d:"dn",r:"Fri 27: $5,226",tier:5,live:true},
   {l:"DXY (Dollar)",v:"98.73",c:"+1.2%",d:"up",r:"Fri 27: 97.57",tier:5,live:true},
   // Tier 6 — The Strait
-  {l:"Hormuz Transits",v:"~6/day",c:"-88%",d:"dn",r:"Fri 27: ~50/day",tier:6,live:false},
+  {l:"Hormuz Transits",v:"~5-7/day",c:"-94%",d:"dn",r:"Pre-war: ~120/day",tier:6,live:false},
 ];
 function renderKPIs(){
   var el=document.getElementById('kg');
@@ -360,7 +364,7 @@ setTimeout(fetchLiveNews,1500);setInterval(fetchLiveNews,120000); // Refresh eve
   html+='<div class="cd" style="border-color:var(--red)"><div class="cd-h" style="font-size:.9rem;color:var(--red)"><div class="cdot"></div> Level 3 \u2014 The Hormuz Chokepoint: ~20% of Global Oil</div><div class="cd-b">';
   html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">';
   html+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">Daily Flow Through Hormuz</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">~20M bbl/d</div><div style="font-size:.65rem;color:var(--txl)">~17.6M bbl/d currently blocked (~88%)</div></div>';
-  html+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">Current Status</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">BLOCKED</div><div style="font-size:.65rem;color:var(--txl)">~8 non-Iranian vessels/day vs 50 normal. Permission-based transits only (CN, IN, PK, TR)</div></div>';
+  html+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">Current Status</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">BLOCKED</div><div style="font-size:.65rem;color:var(--txl)">~5-7 vessels/day vs 120 normal (-94%). Iran-controlled selective transit only</div></div>';
   html+='</div>';
   // Live AIS map - bigger, 16:9 ratio, zoomed into Hormuz
   html+='<div style="font-size:.7rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Live Vessel Traffic \u2014 Strait of Hormuz (AIS Satellite)</div>';
@@ -422,18 +426,18 @@ setTimeout(fetchLiveNews,1500);setInterval(fetchLiveNews,120000); // Refresh eve
   // Infrastructure — Oil only, top 10
   html+='<div style="font-size:.72rem;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 8px">Top 10 ME/Gulf Oil Infrastructure \u2014 Status</div>';
   html+='<table class="ptbl"><thead><tr><th>Facility / Port</th><th>Country</th><th>Type</th><th style="text-align:right">Capacity</th><th>Status</th></tr></thead><tbody>';
-  html+='<tr><td>Ras Tanura</td><td>Saudi Arabia</td><td>Port + Refinery</td><td class="num">6.5M bbl/d</td><td class="status-rk">\u26D4 RESTARTED Mar 18 \u2014 shut Mar 2-18 after drone strike. Now operational</td></tr>';
+  html+='<tr><td>Ras Tanura</td><td>Saudi Arabia</td><td>Port + Refinery</td><td class="num">6.5M bbl/d</td><td class="status-rk">\u26D4 RESTARTED Mar 13 \u2014 shut Mar 2-13 after drone strike. Now operational but exit blocked</td></tr>';
   html+='<tr><td>Kharg Island</td><td style="color:var(--red)">Iran</td><td>Export terminal</td><td class="num">5.0M bbl/d</td><td class="status-rk">\u26D4 US strikes on military targets \u2014 oil infra intact per satellite (TankerTrackers Mar 15). Iran still exporting</td></tr>';
   html+='<tr><td>Yanbu</td><td>Saudi Arabia</td><td>Pipeline terminus</td><td class="num">4.5M bbl/d</td><td style="color:var(--g);font-weight:700">\u2713 ONLY Gulf crude export outlet. SAMREF hit Mar 19 \u2014 minimal impact, operational</td></tr>';
   html+='<tr><td>Ju\'aymah</td><td>Saudi Arabia</td><td>Export terminal</td><td class="num">3.0M bbl/d</td><td class="status-ok">\u2713 Loading \u2014 <span style="color:var(--red)">exit blocked</span></td></tr>';
   html+='<tr><td>Fujairah</td><td>UAE</td><td>Pipeline terminus</td><td class="num">2.0M bbl/d</td><td style="color:var(--g);font-weight:700">\u26A0 Oil storage struck by Iran \u2014 pipeline export still operational</td></tr>';
-  html+='<tr><td>Basra Oil Terminal</td><td>Iraq</td><td>Export terminal</td><td class="num">1.8M bbl/d</td><td class="status-rk">\u26A0 Inside Gulf \u2014 blocked</td></tr>';
+  html+='<tr><td>Basra Oil Terminal</td><td>Iraq</td><td>Export terminal</td><td class="num">1.8M bbl/d</td><td class="status-rk">\u26D4 FORCE MAJEURE Mar 20 \u2014 Basra output cut from 3.3M to 0.9M bpd. Storage full, exports halted</td></tr>';
   html+='<tr><td>Jamnagar*</td><td>India</td><td>Refinery</td><td class="num">1.24M bbl/d</td><td class="status-ok">\u26A0 Running at reduced rates \u2014 feedstock severely constrained</td></tr>';
   html+='<tr><td>Ruwais (ADNOC)</td><td>UAE</td><td>Refinery</td><td class="num">0.92M bbl/d</td><td class="status-rk">\u26D4 SHUT \u2014 drone-linked fire, force majeure</td></tr>';
   html+='<tr><td>Mina al-Ahmadi</td><td>Kuwait</td><td>Export terminal</td><td class="num">0.8M bbl/d</td><td class="status-rk">\u26D4 Mina Abdullah refinery hit by drone Mar 19 \u2014 fire, damage under assessment</td></tr>';
   html+='<tr><td>Abadan</td><td style="color:var(--red)">Iran</td><td>Refinery</td><td class="num">0.40M bbl/d</td><td class="status-rk">\u26D4 Under strikes</td></tr>';
   html+='</tbody></table>';
-  html+='<div class="verified">*Jamnagar sources ~75% feedstock via Hormuz. Last verified: Mar 25, 2026 10:00 CET (static snapshot \u2014 updates require redeployment) \u2014 Sources: Reuters, Bloomberg, S&P Platts, CENTCOM, Aramco, ADNOC</div>';
+  html+='<div class="verified">*Jamnagar sources ~75% feedstock via Hormuz. Last verified: Mar 27, 2026 10:00 CET (static snapshot \u2014 updates require redeployment) \u2014 Sources: Reuters, Bloomberg, S&P Platts, CENTCOM, Aramco, ADNOC</div>';
   html+='</div></div>';
   html+='<div style="font-size:.58rem;color:var(--txl);text-align:center;padding:6px">Data: EIA, IEA, BP Statistical Review 2025, OPEC MOMR, Kpler, Windward AIS. All volumes M bbl/d unless noted.</div>';
   html+='</div>';
@@ -462,7 +466,7 @@ function drawBrentHistory(){
     // 2025
     ["2025-03",71.2,1.2],["2025-06",64.8,1.5],["2025-09",62.5,1.0],["2025-12",68.3,0.3],
     // 2026
-    ["2026-01",69.5,0.1],["2026-02",72.0,-0.2],["2026-03",81.2,-13.1],
+    ["2026-01",69.5,0.1],["2026-02",72.0,-0.2],["2026-03",100.0,-18.0],
   ];
   var W=el.clientWidth||900,H=320,mg={t:25,r:60,b:40,l:60};
   var w=W-mg.l-mg.r,h=H-mg.t-mg.b;
@@ -580,7 +584,7 @@ function drawOilSankey(){
   h+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">LNG Through Hormuz</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">~112 Mtpa</div><div style="font-size:.65rem;color:var(--txl)">~28% of global LNG trade</div></div>';
   h+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">Status</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">HALTED</div><div style="font-size:.65rem;color:var(--txl)">Production stopped Mar 2. Force majeure declared.</div></div>';
   h+='</div>';
-  h+='<div class="co d"><strong>Qatar\u2019s Ras Laffan suffered \u201cextensive damage\u201d</strong> from Iranian missile strike on <strong>Mar 19</strong> (second attack after Mar 2). QatarEnergy declared <strong class="red">force majeure</strong> on all deliveries. Qatar expelled Iranian military diplomats. 77 Mtpa (~20% global LNG) is now ZERO with physical infrastructure damaged. IEA: 40+ energy assets severely damaged across 9 countries \u2014 \u201clargest supply disruption in history.\u201d Trump postponed strikes on Iran power plants Mar 23 citing \u201cproductive talks\u201d \u2014 Iran denies direct talks. Iran told IMO that \u201cnon-hostile\u201d vessels can transit Hormuz with coordination (Mar 24). <strong>Only Oman LNG (10.4 Mtpa, outside Hormuz) remains unaffected.</strong></div>';
+  h+='<div class="co d"><strong>Qatar\u2019s Ras Laffan suffered \u201cextensive damage\u201d</strong> from Iranian missile strike on <strong>Mar 19</strong> (second attack after Mar 2). QatarEnergy declared <strong class="red">force majeure</strong> on all deliveries. Qatar expelled Iranian military diplomats. 77 Mtpa (~20% global LNG) is now ZERO with physical infrastructure damaged. IEA: 40+ energy assets severely damaged across 9 countries \u2014 \u201clargest supply disruption in history.\u201d Trump extended Hormuz deadline to <strong>Apr 6</strong>. Iran now charging transit fees in Yuan. Iran allowing \u201cnon-hostile\u201d ships (India, China, Russia, S. Korea) through with coordination. <strong>Day 27 of conflict \u2014 no ceasefire in sight.</strong></div>';
   h+='</div></div>';
   // LEVEL 5 — Who's Exposed (Level 4 removed — static price data)
   h+='<div class="cd"><div class="cd-h" style="font-size:.9rem">Level 5 \u2014 Who\'s Exposed: Gas Supply by Region</div><div class="cd-b">';
@@ -602,12 +606,12 @@ function drawOilSankey(){
   h+='<tr><td>Das Island (ADGAS)</td><td>UAE</td><td class="num">5.8 Mtpa</td><td class="status-rk">Via Hormuz</td><td class="status-rk">\u26D4 UAE Habshan gas SHUT DOWN Mar 19 \u2014 debris from intercepted strike</td></tr>';
   h+='<tr><td>Oman LNG (Qalhat)</td><td>Oman</td><td class="num">10.4 Mtpa</td><td class="status-ok">Outside Hormuz \u2713</td><td class="status-ok">\u2713 Fully operational</td></tr>';
   h+='</tbody></table>';
-  h+='<div class="verified">Last verified: Mar 25, 2026 10:00 CET (static snapshot \u2014 updates require redeployment) \u2014 Sources: Bloomberg, Al Jazeera, CNBC, CNN, Reuters, IEA OMR March 2026, QatarEnergy force majeure (Mar 4)</div>';
+  h+='<div class="verified">Last verified: Mar 27, 2026 10:00 CET (static snapshot \u2014 updates require redeployment) \u2014 Sources: Bloomberg, Al Jazeera, CNBC, CNN, Reuters, IEA OMR March 2026, QatarEnergy force majeure (Mar 4)</div>';
   // EU Gas Storage
   h+='<div style="font-size:.72rem;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 8px">EU Gas Storage Levels (AGSI)</div>';
-  var euGas=[{name:"Netherlands",pct:24,prev:42,col:"#D43B2F"},{name:"France",pct:29,prev:48,col:"#D43B2F"},{name:"Germany",pct:30,prev:45,col:"#D43B2F"},{name:"Austria",pct:35,prev:50,col:"#E8A317"},{name:"EU Average",pct:39,prev:52,col:"#E8A317"},{name:"Italy",pct:45,prev:55,col:"#E8A317"}];
+  var euGas=[{name:"Netherlands",pct:9,prev:42,col:"#D43B2F"},{name:"Croatia",pct:16,prev:35,col:"#D43B2F"},{name:"Belgium",pct:23,prev:40,col:"#D43B2F"},{name:"EU Average",pct:28,prev:52,col:"#D43B2F"},{name:"Czech Rep.",pct:29,prev:45,col:"#D43B2F"},{name:"Austria",pct:36,prev:50,col:"#E8A317"}];
   h+=euGas.map(function(s){return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div style="width:100px;font-size:.72rem;font-weight:600;color:var(--txl)">'+s.name+'</div><div style="flex:1;background:var(--brd);border-radius:3px;height:18px;overflow:hidden;position:relative"><div style="width:'+s.pct+'%;height:100%;background:'+s.col+';border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:5px"><span style="font-size:.6rem;font-weight:700;color:#fff;font-family:JetBrains Mono">'+s.pct+'%</span></div></div><div style="width:60px;font-size:.6rem;color:var(--txl);text-align:right">vs '+s.prev+'% YoY</div></div>'}).join('');
-  h+='<div class="co d" style="margin-top:8px"><strong>EU storage at 39%</strong> vs 52% same time last year. <strong style="color:var(--red)">Netherlands at 24% and France at 29% are critically low.</strong> EU target is 90% by Nov 1 \u2014 will require aggressive summer injections even without Hormuz disruption.</div>';
+  h+='<div class="co d" style="margin-top:8px"><strong>EU storage at 28%</strong> vs 52% same time last year (AGSI Mar 26). <strong style="color:var(--red)">Netherlands at 9% is critically low.</strong> EU target is 90% by Nov 1 \u2014 will require aggressive summer injections even without Hormuz disruption. Wikipedia: EU storage estimated at ~30% following harsh 2025-26 winter.</div>';
   h+='</div></div>';
   h+='<div style="font-size:.58rem;color:var(--txl);text-align:center;padding:6px">Data: IEA Gas Market Report, GIIGNL, AGSI, BP Statistical Review 2025, ICIS. Volumes in Bcm/yr (gas) or Mtpa (LNG).</div>';
   h+='</div>';
