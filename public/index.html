@@ -113,9 +113,9 @@ html{font-size:16px}body{font-family:'DM Sans',sans-serif;background:var(--bg);c
 </head>
 <body>
 <div class="hdr">
-  <div><div class="hdr-t">Geopolitical Energy Intelligence Dashboard</div><div class="hdr-s">Strait of Hormuz Crisis · Route Deal in Principle — Strait Still Closed · Day 160 · August 2026</div></div>
+  <div><div class="hdr-t">Geopolitical Energy Intelligence Dashboard</div><div class="hdr-s">Strait of Hormuz Crisis · Tanker War — Strait Closed, Iran Plan Rejected · Day 213 · September 2026</div></div>
   <div class="hdr-r">
-    <div class="cbadge"><div class="cdot"></div><span class="clbl">Route Deal — Not Yet Reopened</span></div>
+    <div class="cbadge"><div class="cdot"></div><span class="clbl">Strait Closed — Tanker War</span></div>
     <div><div class="clk-t" id="ct"></div><div class="clk-d" id="cdt"></div></div>
   </div>
 </div>
@@ -217,6 +217,24 @@ var TL=[
   {date:"Aug 5, 16:00",desc:"Baghaei: reopening contingent on US lifting naval blockade + halting strikes on Iranian infrastructure",sev:"cr"},
   {date:"Aug 5, 18:00",desc:"Baltic Dry 2,936 (+3.3%), 4th session up, highest since Jul 14 — freight diverges from crude",sev:"hi"},
   {date:"Aug 6, 08:00",desc:"Gold rallies ~6% on week toward $4,250; Brent ~$79.75; strait remains closed",sev:"ne"},
+  {date:"Aug 10, 09:00",desc:"Brent +3.3% to $84.64 as Tehran insists the strait won't reopen without major US concessions",sev:"hi"},
+  {date:"Aug 12, 10:00",desc:"Houthi attack kills six — first Red Sea death since the Iran war began; Brent nears $90",sev:"cr"},
+  {date:"Aug 25, 12:00",desc:"Tanker Al Salam II hit by a projectile in the strait; Iran and Oman discuss a joint corridor + mine clearing",sev:"cr"},
+  {date:"Aug 26, 10:00",desc:"Iran and Oman agree a new TEMPORARY Hormuz route through Iranian/Omani waters under Iranian management",sev:"ne"},
+  {date:"Aug 27, 14:00",desc:"CENTCOM: all Iranian mines cleared from the internationally recognised traffic lanes",sev:"ne"},
+  {date:"Aug 30, 08:00",desc:"US strikes Larak Island after a second tanker is hit (Aug 29) — accuses Iran of preparing new mine launches",sev:"cr"},
+  {date:"Aug 31, 18:00",desc:"August: Brent averages $91 (+$7 MoM, EIA); 346 non-Iranian transits in the month — post-conflict record",sev:"hi"},
+  {date:"Sep 2, 12:00",desc:"US hits Iranian government tankers for the first time — new 'tanker for tanker' policy, ~100 targets struck",sev:"cr"},
+  {date:"Sep 5, 16:00",desc:"Iran fires ballistic missiles at a US carrier + destroyer; US disables 2 tankers and sinks M/T Kylo in the Gulf of Oman",sev:"cr"},
+  {date:"Sep 9, 10:00",desc:"US destroys 5 Iranian tankers; Iran attacks 10 ships and a base in Jordan. Brent breaks $100",sev:"cr"},
+  {date:"Sep 11, 12:00",desc:"Houthis seize a strategic island at the Red Sea entrance — Bab el-Mandeb opens as a second chokepoint front",sev:"cr"},
+  {date:"Sep 15, 16:00",desc:"VLCC Ras Tanura–Ningbo (TD3C) assessed at $1.099M/day — first time above $1M",sev:"hi"},
+  {date:"Sep 18, 10:00",desc:"97 non-Iranian transits Sep 7-13 (3-week high) but VLCC rates top $1.2M/day",sev:"hi"},
+  {date:"Sep 20, 12:00",desc:"IMF PortWatch: 1 transit vs 73/day baseline — strait effectively closed",sev:"cr"},
+  {date:"Sep 21, 18:00",desc:"US diesel $6.529/gal — record high in the EIA series (since 1994). EU storage 70.1%",sev:"hi"},
+  {date:"Sep 25, 14:00",desc:"Iran offers 7-day roadmap: lift blockade + oil sanctions, release frozen funds → strait reopens. Brent settles $104.32",sev:"ne"},
+  {date:"Sep 26, 09:00",desc:"Trump rejects Iran's 7-day plan; tells aides strikes expected to resume after November midterms",sev:"cr"},
+  {date:"Sep 28, 06:00",desc:"Brent +2.9% to $107.34 in Asian trade on the rejection",sev:"hi"},
 ];
 // timeline removed
 
@@ -245,25 +263,25 @@ function updateExecSummary(){
 const KPI=[
   // VERIFIED Fri Feb 27 closes: Yahoo Finance (WTI, TTF), OilPrice (Brent), Barchart (HH, RBOB), Fortune (Gold), FxDailyReport (DXY), Investing.com (BDI), DOE/EIA (Diesel), EC Oil Bulletin (IT Diesel)
   // Tier 1 — Crude Oil
-  {l:"Brent Crude",v:"$79.75",c:"+9.2%",d:"up",r:"Fri 27: $73.00",tier:1,live:true},
-  {l:"WTI Crude",v:"$75.22",c:"+12.2%",d:"up",r:"Fri 27: $67.02",tier:1,live:true},
-  {l:"Brent-WTI Spread",v:"$4.53",c:"-24.2%",d:"dn",r:"Fri 27: $5.98",tier:1,live:true},
+  {l:"Brent Crude",v:"$104.32",c:"+42.9%",d:"up",r:"Fri 27: $73.00",tier:1,live:true},
+  {l:"WTI Crude",v:"$92.41",c:"+37.9%",d:"up",r:"Fri 27: $67.02",tier:1,live:true},
+  {l:"Brent-WTI Spread",v:"$11.91",c:"+99.2%",d:"up",r:"Fri 27: $5.98",tier:1,live:true},
   // Tier 2 — Natural Gas
-  {l:"TTF Gas (EU)",v:"€53.62",c:"+67.8%",d:"up",r:"Fri 27: €31.96",tier:2,live:true},
-  {l:"Henry Hub (US)",v:"$3.25",c:"+13.5%",d:"up",r:"Fri 27: $2.864",tier:2,live:true},
+  {l:"TTF Gas (EU)",v:"~€72",c:"+125%",d:"up",r:"Fri 27: €31.96",tier:2,live:true},
+  {l:"Henry Hub (US)",v:"$3.146",c:"+9.8%",d:"up",r:"Fri 27: $2.864",tier:2,live:true},
   // Tier 3 — Downstream / Consumer
-  {l:"RBOB Gasoline",v:"$2.80",c:"+22.4%",d:"up",r:"Fri 27: $2.287",tier:3,live:true},
+  {l:"RBOB Gasoline",v:"$3.224",c:"+41.0%",d:"up",r:"Fri 27: $2.287",tier:3,live:true},
   {l:"EU Power (DE)",v:"€95",c:"+21.8%",d:"up",r:"Fri 27: ~€78",tier:3,live:true},
-  {l:"US Diesel",v:"$5.348",c:"+50.7%",d:"up",r:"Fri 27: $3.548",tier:3,live:false},
-  {l:"IT Diesel",v:"€2.038",c:"+23.1%",d:"up",r:"Fri 23: €1.655",tier:3,live:false},
+  {l:"US Diesel",v:"$6.529",c:"+84.0%",d:"up",r:"Fri 27: $3.548",tier:3,live:false},
+  {l:"IT Diesel",v:"€2.281",c:"+37.8%",d:"up",r:"Fri 23: €1.655",tier:3,live:false},
   // Tier 4 — Shipping
-  {l:"VLCC Rate",v:"Elevated",c:"",d:"up",r:"Fri 27: ~$45k/d",tier:4,live:false},
-  {l:"Baltic Dry",v:"2,936",c:"+39.0%",d:"up",r:"Fri 27: 2,112",tier:4,live:true},
+  {l:"VLCC Rate",v:"Record >$1M/d",c:"",d:"up",r:"Fri 27: ~$45k/d",tier:4,live:false},
+  {l:"Baltic Dry",v:"3,426",c:"+62.2%",d:"up",r:"Fri 27: 2,112",tier:4,live:true},
   // Tier 5 — Risk Sentiment
-  {l:"Gold",v:"$4,242",c:"-18.8%",d:"dn",r:"Fri 27: $5,226",tier:5,live:true},
-  {l:"DXY (Dollar)",v:"99.76",c:"+2.2%",d:"up",r:"Fri 27: 97.57",tier:5,live:true},
+  {l:"Gold",v:"$4,285",c:"-18.0%",d:"dn",r:"Fri 27: $5,226",tier:5,live:true},
+  {l:"DXY (Dollar)",v:"~101.1",c:"+3.6%",d:"up",r:"Fri 27: 97.57",tier:5,live:true},
   // Tier 6 — The Strait
-  {l:"Hormuz Transits",v:"~12/day",c:"-84%",d:"dn",r:"Baseline: 73/day (PortWatch)",tier:6,live:false},
+  {l:"Hormuz Transits",v:"~1/day",c:"-99%",d:"dn",r:"Baseline: 73/day (PortWatch)",tier:6,live:false},
 ];
 function renderKPIs(){
   var el=document.getElementById('kg');
@@ -314,6 +332,22 @@ function sw(id,el){document.querySelectorAll('.tp').forEach(function(p){p.classL
 // ═══ LIVE NEWS SYSTEM ═══
 // Static fallback (scenario data — shown while live feed loads or on error)
 const STATIC_NEWS=[
+  {t:"Sep 28",h:"Oil jumps in Asia after Trump rejects Iranian peace proposal; Brent +2.9% to $107.34",s:"CNBC",sv:"hi",url:"https://www.cnbc.com/2026/09/28/oil-price-today-wti-brent-trump-iran.html"},
+  {t:"Sep 26",h:"Trump rejects Iran's seven-day roadmap to end war and reopen Hormuz",s:"Al Jazeera",sv:"cr",url:"https://www.aljazeera.com/news/2026/9/26/trump-rejects-irans-seven-day-roadmap-to-reopen-strait-of-hormuz"},
+  {t:"Sep 26",h:"Iran says it is awaiting 'definitive' US response despite Trump rejecting latest proposal",s:"CNN",sv:"ne",url:"https://www.cnn.com/2026/09/26/middleeast/trump-rejects-iran-proposal-hormuz-intl"},
+  {t:"Sep 25",h:"Iran proposes deal to reopen the Strait of Hormuz in 7 days if the US meets its conditions",s:"Washington Post",sv:"ne",url:"https://www.washingtonpost.com/national/2026/09/25/iran-us-war-negotiations-strait-hormuz/93f94860-b8e6-11f1-94cb-d3d8f22a8c8b_story.html"},
+  {t:"Sep 25",h:"Oil ends week lower as truce hopes hit WTI, while Middle East supply risks keep Brent above $100",s:"EnergyNow",sv:"hi",url:"https://energynow.com/2026/09/oil-ends-week-lower-as-u-s-iran-truce-hopes-hit-wti-while-middle-east-supply-risks-keep-brent-above-100/"},
+  {t:"Sep 25",h:"Baltic Dry Index falls 47 points to 3,426 but holds weekly gain",s:"Hellenic Shipping News",sv:"hi",url:"https://www.hellenicshippingnews.com/baltic-dry-index-falls-to-3426-down-47-points/"},
+  {t:"Sep 24",h:"EU diesel hits an all-time high of €2.23 per litre; 19 countries set records",s:"Eunews",sv:"hi",url:"https://www.eunews.it/en/2026/09/24/fuel-prices-diesel-in-the-eu-hits-an-all-time-high-of-e2-23-per-litre/"},
+  {t:"Sep 22",h:"EIA: US diesel climbs to $6.529/gal — record high in the weekly series",s:"IndexBox",sv:"hi",url:"https://www.indexbox.io/blog/eia-weekly-fuel-price-update-us-gasoline-and-diesel-prices-rise-on-september-22-2026/"},
+  {t:"Sep 18",h:"Hormuz transits hit three-week high as VLCC rates explode",s:"USNI News",sv:"hi",url:"https://news.usni.org/2026/09/18/hormuz-transits-hit-three-week-high-vlcc-rates-explode"},
+  {t:"Sep 11",h:"Iran-backed Houthis seize a strategic port and island, opening a new battlefront at the Red Sea entrance",s:"NPR",sv:"cr",url:"https://www.npr.org/2026/09/11/g-s1-142822/houthis-red-sea-port"},
+  {t:"Sep 9",h:"US destroys five Iranian oil tankers as Iran attacks 10 ships and a Jordan base",s:"Al Jazeera",sv:"cr",url:"https://www.aljazeera.com/news/2026/9/9/us-destroys-five-iranian-tankers-iran-retaliates-with-attacks-on-jordan-base"},
+  {t:"Sep 5",h:"US strikes three Iranian tankers after ballistic missiles fired at Navy carrier and destroyer",s:"CNN",sv:"cr",url:"https://www.cnn.com/2026/09/05/middleeast/iran-us-tanker-kharg-intl"},
+  {t:"Sep 3",h:"How much oil is going through Hormuz? Why the data doesn't match US claims",s:"Al Jazeera",sv:"ne",url:"https://www.aljazeera.com/news/2026/9/3/how-much-oil-is-going-through-hormuz-how-data-doesnt-match-us-claims"},
+  {t:"Sep 2",h:"US strikes Iranian tankers for the first time in retaliation for Hormuz attacks — 'tanker for tanker'",s:"Axios",sv:"cr",url:"https://www.axios.com/2026/09/02/iran-tankers-hormuz-attacks-oil"},
+  {t:"Aug 26",h:"Iran and Oman agree new temporary Hormuz route, top official says",s:"Al Jazeera",sv:"ne",url:"https://www.aljazeera.com/economy/2026/8/26/top-official-says-iran-oman-have-agreed-new-temporary-hormuz-route"},
+  {t:"Aug 12",h:"Houthi attack kills six in first Red Sea death since the Iran war began",s:"CNBC",sv:"cr",url:"https://www.cnbc.com/2026/08/12/us-iran-war-trump-hormuz-houthi-attack-blockade-.html"},
   {t:"Aug 6",h:"Gold rallies ~6% on the week toward $4,250 as Middle East talks progress and oil slides",s:"CNBC",sv:"ne",url:"https://www.cnbc.com/select/the-price-of-gold-today-august-6-2026/"},
   {t:"Aug 5",h:"Iran and Oman agree coordinates for new Strait of Hormuz shipping routes; joint statement in final drafting",s:"Bloomberg",sv:"ne",url:"https://www.bloomberg.com/news/articles/2026-08-05/iran-says-agreement-on-hormuz-shipping-route-reached-with-oman"},
   {t:"Aug 5",h:"Baghaei: reopening contingent on US removing naval blockade and halting attacks on Iranian infrastructure",s:"Washington Times",sv:"cr",url:"https://www.washingtontimes.com/news/2026/aug/5/iran-oman-agree-new-shipping-routes-hormuz-washington-tehran-circle/"},
@@ -530,8 +564,8 @@ setTimeout(fetchLiveNews,1500);setInterval(fetchLiveNews,300000); // Refresh eve
   // ─── LEVEL 3 ───
   html+='<div class="cd" style="border-color:var(--red)"><div class="cd-h" style="font-size:.9rem;color:var(--red)"><div class="cdot"></div> Level 3 — The Hormuz Chokepoint: ~20% of Global Oil</div><div class="cd-b">';
   html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">';
-  html+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">Daily Flow Through Hormuz</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">~20M bbl/d</div><div style="font-size:.65rem;color:var(--txl)">Pre-war capacity. Rystad: ~$58B damage across 80+ facilities. Ras Laffan force majeure extended into mid-August</div></div>';
-  html+='<div style="text-align:center;padding:14px;background:rgba(232,163,23,.06);border:1px solid rgba(232,163,23,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">Current Status</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--amb)">ROUTE DEAL, STILL CLOSED</div><div style="font-size:.65rem;color:var(--txl)">Iran-Oman agreed lane coordinates Aug 5. <strong>Reopening is contingent on the US lifting its naval blockade and halting strikes</strong>. 84 transits Jul 27-Aug 2 (~12/day) vs 73/day baseline — up from 45 the prior week</div></div>';
+  html+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">Daily Flow Through Hormuz</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">~20M bbl/d</div><div style="font-size:.65rem;color:var(--txl)">Pre-war capacity. Rystad: ~$58B damage across 80+ facilities. Ras Laffan force majeure extended to mid-September</div></div>';
+  html+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">Current Status</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">CLOSED — TANKER WAR</div><div style="font-size:.65rem;color:var(--txl)">US blockade reimposed in August; since Sep 2 a <strong>"tanker for tanker"</strong> exchange (8+ Iranian tankers hit). Iran\'s 7-day reopening plan <strong>rejected Sep 26</strong>. PortWatch: 1 transit on Sep 20 vs 73/day baseline</div></div>';
   html+='</div>';
   // Live AIS map - bigger, 16:9 ratio, zoomed into Hormuz
   html+='<div style="font-size:.7rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Live Vessel Traffic — Strait of Hormuz (AIS Satellite)</div>';
@@ -597,7 +631,7 @@ setTimeout(fetchLiveNews,1500);setInterval(fetchLiveNews,300000); // Refresh eve
   html+='<tr><td>Shaybah</td><td>Saudi Arabia</td><td>Oil field</td><td class="num">1.0M bbl/d</td><td class="status-rk">⛔ Repeatedly targeted by drone strikes</td></tr>';
   html+='<tr><td>Mina al-Ahmadi</td><td>Kuwait</td><td>Export terminal</td><td class="num">0.8M bbl/d</td><td class="status-rk">⛔ Drone attacks Mar 19 + Apr 3 — fire in operational units. KPC + GPIC Bahrain also hit Apr 5</td></tr>';
   html+='</tbody></table>';
-  html+='<div class="verified">*Jamnagar sources ~75% feedstock via Hormuz. Last verified: Aug 6, 2026 16:00 CET (static snapshot — updates require redeployment) — Sources: Lloyd\'s List Intelligence, CNN, CNBC, Axios, HSToday, Windward, Fortune, EIA STEO Jul 2026, Wikipedia Iran-war ceasefire</div>';
+  html+='<div class="verified">*Jamnagar sources ~75% feedstock via Hormuz. Last verified: Sep 28, 2026 08:00 CET (static snapshot — updates require redeployment) — Sources: Lloyd\'s List Intelligence, CNN, CNBC, Axios, HSToday, Windward, Fortune, EIA STEO Jul 2026, Wikipedia Iran-war ceasefire</div>';
   html+='</div></div>';
   html+='<div style="font-size:.58rem;color:var(--txl);text-align:center;padding:6px">Data: EIA, IEA, BP Statistical Review 2025, OPEC MOMR, Kpler, Windward AIS. All volumes M bbl/d unless noted.</div>';
   html+='</div>';
@@ -626,7 +660,7 @@ function drawBrentHistory(){
     // 2025
     ["2025-03",71.2,1.2],["2025-06",64.8,1.5],["2025-09",62.5,1.0],["2025-12",68.3,0.3],
     // 2026
-    ["2026-01",69.5,0.1],["2026-02",72.0,-0.2],["2026-03",100.0,-18.0],["2026-04",117.0,-22.0],["2026-05",102.0,-15.0],["2026-06",85.0,-10.0],["2026-07",83.0,-12.0],["2026-08",80.0,-9.0],
+    ["2026-01",69.5,0.1],["2026-02",72.0,-0.2],["2026-03",100.0,-18.0],["2026-04",117.0,-22.0],["2026-05",102.0,-15.0],["2026-06",85.0,-10.0],["2026-07",83.0,-12.0],["2026-08",91.0,-11.0],["2026-09",99.3,-13.0],
   ];
   var W=el.clientWidth||900,H=320,mg={t:25,r:60,b:40,l:60};
   var w=W-mg.l-mg.r,h=H-mg.t-mg.b;
@@ -813,9 +847,9 @@ document.addEventListener('click',function(ev){var b=ev.target.closest&&ev.targe
   h+='<div class="cd" style="border-color:var(--red)"><div class="cd-h" style="font-size:.9rem;color:var(--red)"><div class="cdot"></div> Level 3 — The Hormuz Gas Chokepoint: ~28% of Global LNG</div><div class="cd-b">';
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">';
   h+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">LNG Through Hormuz</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">~112 Mtpa</div><div style="font-size:.65rem;color:var(--txl)">~28% of global LNG trade</div></div>';
-  h+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">Status</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">FORCE MAJEURE</div><div style="font-size:.65rem;color:var(--txl)">Extended into mid-August. 12.8 Mtpa (~17% of Qatar capacity) needs 3-5 yr rebuild. ~50% returns ~1 month <em>after</em> safe navigation resumes</div></div>';
+  h+='<div style="text-align:center;padding:14px;background:rgba(212,59,47,.06);border:1px solid rgba(212,59,47,.15);border-radius:6px"><div style="font-size:.58rem;color:var(--txl);text-transform:uppercase">Status</div><div style="font-family:JetBrains Mono;font-size:2rem;font-weight:700;color:var(--red)">FORCE MAJEURE</div><div style="font-size:.65rem;color:var(--txl)">Extended to mid-September. 12.8 Mtpa (~17% of Qatar capacity) needs 3-5 yr rebuild. ~50% returns ~1 month <em>after</em> safe navigation resumes</div></div>';
   h+='</div>';
-  h+='<div class="co w"><strong>Day 160 — Route Deal in Principle, Strait Still Closed.</strong> Iran and Oman <strong>agreed the coordinates</strong> of new Hormuz shipping lanes on <strong>5 August</strong>; the joint statement is in final drafting. But FM spokesman Esmail Baghaei was explicit that reopening is <strong class="red">contingent on the US removing its naval blockade and halting all strikes on Iranian infrastructure</strong> — and that a route agreement <em>"cannot in itself be interpreted as meaning the waterway has become safe for passing vessels."</em> CENTCOM was still maintaining the blockade as of Aug 5. <strong>Traffic is recovering but far from normal:</strong> 84 transits Jul 27-Aug 2 (~12/day) against a 73/day PortWatch baseline, up from 45 the prior week; non-Iranian gas carriers and containerships resumed after a pause. <strong style="color:var(--red)">The bypass is now itself under attack</strong> — two ships struck on the Omani route since 1 Aug. <strong>Ras Laffan</strong> force majeure extended into mid-August; 12.8 Mtpa (~17% of Qatar capacity) needs 3-5 years to rebuild, and ~50% of capacity only returns about a month <em>after</em> safe navigation resumes. Markets are pricing de-escalation — Brent -4.8% then -5.3% on Aug 3-4 — but see the freight divergence below.</div>';
+  h+='<div class="co d"><strong>Day 213 — Tanker War, Strait Closed.</strong> The August route diplomacy did not hold. After tankers were hit in the strait on <strong>25 and 29 August</strong>, the US moved from blockade enforcement to <strong class="red">direct retaliation on Iranian tankers</strong> (Sep 2, 5 and 9; one sunk in the Gulf of Oman), and Iran answered with missiles at US warships and attacks on 10 ships. On <strong>25 September</strong> Tehran offered a 7-day roadmap: lift the blockade and oil sanctions, release frozen funds, reopen the strait. <strong>Trump rejected it on 26 September</strong> and reportedly expects strikes to resume after the November midterms. <strong>Traffic:</strong> August was a post-conflict high (346 non-Iranian transits) and Sep 7-13 reached 97, but PortWatch logged <strong class="red">1 transit on 20 September</strong>. The US cleared the mines from the TSS lanes on 27 Aug, so the constraint is now military risk, not mines. <strong style="color:var(--red)">A second front has opened:</strong> the Houthis seized an island at the Bab el-Mandeb entrance on 11 Sep, putting the Red Sea bypass for Saudi exports at risk. <strong>Ras Laffan</strong> force majeure was extended to mid-September, and 12.8 Mtpa (~17% of Qatar capacity) still needs 3-5 years to rebuild. <strong>TTF ~€72</strong> (+125% vs Feb 27) with EU storage at 70%.</div>';
   h+='</div></div>';
   // LEVEL 5 — Who's Exposed (Level 4 removed — static price data)
   h+='<div class="cd"><div class="cd-h" style="font-size:.9rem">Level 5 — Who\'s Exposed: Gas Supply by Region</div><div class="cd-b">';
@@ -839,12 +873,12 @@ document.addEventListener('click',function(ev){var b=ev.target.closest&&ev.targe
   h+='<tr><td>Das Island (ADGAS)</td><td>UAE</td><td class="num">5.8 Mtpa</td><td class="status-rk">Via Hormuz</td><td style="color:var(--amb);font-weight:700">⚠ RESUMING — exports restarting as Hormuz reopens. Habshan + Shah gas field restart assessments under ceasefire framework</td></tr>';
   h+='<tr><td>Oman LNG (Qalhat)</td><td>Oman</td><td class="num">10.4 Mtpa</td><td class="status-ok">Outside Hormuz ✓</td><td class="status-ok">✓ Fully operational</td></tr>';
   h+='</tbody></table>';
-  h+='<div class="verified">Last verified: Aug 6, 2026 16:00 CET (static snapshot — updates require redeployment) — Sources: Oil & Gas Middle East (Ras Laffan Jul 29), CNBC (Brent +7.9% Jul 29), Al Jazeera, CNN, Reuters, EIA STEO Jul 2026, QatarEnergy, EU AGSI (late Jul, ~55.7%), ACER LNG refill note</div>';
+  h+='<div class="verified">Last verified: Sep 28, 2026 08:00 CET (static snapshot — updates require redeployment) — Sources: Oil & Gas Middle East (Ras Laffan Jul 29), CNBC (Brent +7.9% Jul 29), Al Jazeera, CNN, Reuters, EIA STEO Jul 2026, QatarEnergy, EU AGSI (late Jul, ~55.7%), ACER LNG refill note</div>';
   // EU Gas Storage
   h+='<div style="font-size:.72rem;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 8px">EU Gas Storage Levels (AGSI)</div>';
   var euGas=[{name:"Netherlands",pct:6,prev:42,col:"#D43B2F",stale:true},{name:"Croatia",pct:16,prev:35,col:"#D43B2F",stale:true},{name:"Belgium",pct:23,prev:40,col:"#D43B2F",stale:true},{name:"Czech Rep.",pct:29,prev:45,col:"#D43B2F",stale:true},{name:"Austria",pct:36,prev:50,col:"#E8A317",stale:true},{name:"Germany",pct:39,prev:55,col:"#E8A317",stale:true},{name:"EU Average",pct:57,prev:68,col:"#E8A317"}];
   h+=euGas.map(function(s){return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div style="width:100px;font-size:.72rem;font-weight:600;color:var(--txl)">'+s.name+(s.stale?' <span style="font-size:.55rem;color:var(--txl);font-style:italic">(Mar)</span>':'')+'</div><div style="flex:1;background:var(--brd);border-radius:3px;height:18px;overflow:hidden;position:relative"><div style="width:'+s.pct+'%;height:100%;background:'+s.col+';border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding-right:5px"><span style="font-size:.6rem;font-weight:700;color:#fff;font-family:JetBrains Mono">'+s.pct+'%</span></div></div><div style="width:60px;font-size:.6rem;color:var(--txl);text-align:right">vs '+s.prev+'% YoY</div></div>'}).join('');
-  h+='<div class="co w" style="margin-top:8px"><strong>EU storage ~57% at 2 Aug</strong> — the <strong>lowest early-August level on record</strong> against a ~68-69% seasonal norm, with injection running at a three-year low. Mandatory winter target stays relaxed <strong>90→80%</strong> (ACER flex). At the current ~+0.26 pp/day the EU reaches roughly <strong>80.5% by 1 November</strong> — it only just clears the relaxed target, with no margin for an early cold snap. ACER: higher LNG imports will be needed to refill ahead of winter. Country bars marked (Mar) reflect Mar 26 AGSI data — fresh country-level breakdown is not retrievable from public endpoints.</div>';
+  h+='<div class="co w" style="margin-top:8px"><strong>EU storage 70.1% at 21 Sep</strong> (AGSI+), up from 57% on 2 Aug — about +0.26 pp/day, still well below the ~85-90% usual for late September. Mandatory winter target stays relaxed <strong>90→80%</strong> (ACER flex). At the current pace the EU reaches roughly <strong>81% by 1 November</strong>: it clears the relaxed target with almost no margin, while Qatari LNG stays under force majeure and Asia competes for the same spot cargoes. Country bars marked (Mar) reflect Mar 26 AGSI data — fresh country-level breakdown is not retrievable from public endpoints.</div>';
   h+='</div></div>';
   h+='<div style="font-size:.58rem;color:var(--txl);text-align:center;padding:6px">Data: IEA Gas Market Report, GIIGNL, AGSI, BP Statistical Review 2025, ICIS. Volumes in Bcm/yr (gas) or Mtpa (LNG).</div>';
   h+='</div>';
